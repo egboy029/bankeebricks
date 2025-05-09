@@ -40,6 +40,44 @@ A Discord bot that sends notifications for new LEGO products, sales, exclusive i
    npm start
    ```
 
+## AWS EC2 Deployment
+
+1. Launch an EC2 instance:
+   - Choose Amazon Linux 2 or Ubuntu
+   - Select t2.micro for free tier or t2.small for better performance
+   - Configure security group to allow SSH (port 22)
+
+2. Connect to your EC2 instance:
+   ```
+   ssh -i your-key.pem ec2-user@your-ec2-ip
+   ```
+
+3. Clone the repository and deploy:
+   ```
+   git clone https://github.com/egboy029/bankeebricks.git
+   cd bankeebricks
+   chmod +x deploy.sh
+   ./deploy.sh
+   ```
+
+4. Configure your application:
+   ```
+   nano config/config.js
+   ```
+   
+5. For long-term running with PM2:
+   ```
+   pm2 start ecosystem.config.js --env production
+   pm2 save
+   pm2 startup
+   ```
+
+6. Monitor the application:
+   ```
+   pm2 logs bankeebricks
+   pm2 monit
+   ```
+
 ## License
 
 MIT
